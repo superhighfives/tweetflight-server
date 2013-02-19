@@ -3,13 +3,19 @@ require 'sinatra'
 require 'sinatra/cross_origin'
 require 'sinatra/dalli'
 require 'json'
+require 'twitter'
+require 'ostruct'
 
 # dev mode easy lols
 require 'sinatra/reloader' if development?
 
+# cross domain
 set :allow_origin, 'http://0.0.0.0:3501'
 set :allow_methods, [:get, :post, :options]
 set :allow_credentials, false
+
+# dalli settings
+set :cache_default_expiry, 1
 
 configure do
   enable :cross_origin
@@ -37,11 +43,15 @@ def tweet_for_lyric(lyric)
   end
 end
 
+def is_tweet_ok(tweet)
+  tweet.to_user_id == 0 && tweet.text !~ /RT/
+end
+
 def do_twitter_search_for_lyric(lyric)
   begin
     # search twitter
-    require 'ostruct'
-    OpenStruct.new(text: "blah", link: "blah", username: "blah", created_at: "blah")
+    tweet = Twitter.search(lyric[:line], :result_type => "recent").select{ |tweet| is_tweet_ok(tweet) }.first
+    OpenStruct.new(text: tweet.text, link: "http://twitter.com/#{tweet.from_user_id}/status/#{tweet.id}", username: tweet.from_user, created_at: tweet.created_at)
   rescue
     nil
   end

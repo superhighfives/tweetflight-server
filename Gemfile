@@ -6,6 +6,7 @@ gem 'sinatra-cross_origin'
 gem 'sinatra-contrib'
 gem 'sinatra-dalli'
 gem 'json'
+gem 'twitter'
 
 group :development do
   gem 'heroku'
