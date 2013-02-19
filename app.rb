@@ -30,7 +30,21 @@ def lyrics
 end
 
 def tweet_for_lyric(lyric)
-  {:text => "", :link => "", :tweeter => "", :created_at => ""}
+  # twitter search logic goes here
+  tweet = do_twitter_search_for_lyric(lyric)
+  if tweet
+    {:text => tweet.text, :link => tweet.link, :tweeter => tweet.username, :created_at => tweet.created_at}
+  end
+end
+
+def do_twitter_search_for_lyric(lyric)
+  begin
+    # search twitter
+    require 'ostruct'
+    OpenStruct.new(text: "blah", link: "blah", username: "blah", created_at: "blah")
+  rescue
+    nil
+  end
 end
 
 get '/' do
