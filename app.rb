@@ -3,6 +3,9 @@ require 'sinatra'
 require 'sinatra/cross_origin'
 require 'json'
 
+# dev mode easy lols
+require 'sinatra/reloader' if development?
+
 set :allow_origin, 'http://0.0.0.0:3501'
 set :allow_methods, [:get, :post, :options]
 set :allow_credentials, false
