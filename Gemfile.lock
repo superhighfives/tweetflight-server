@@ -26,6 +26,7 @@ GEM
     multi_json (1.6.1)
     multipart-post (1.2.0)
     netrc (0.7.7)
+    newrelic_rpm (3.4.1)
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
@@ -68,6 +69,7 @@ DEPENDENCIES
   foreman
   heroku
   json
+  newrelic_rpm
   sinatra
   sinatra-contrib
   sinatra-cross_origin
