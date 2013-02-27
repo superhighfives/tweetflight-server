@@ -16,6 +16,11 @@ set :allow_credentials, false
 
 # dalli settings
 set :cache_default_expiry, 1
+if production?
+  set :cache_client, ::Dalli::Client.new(ENV['MEMCACHIER_SERVERS'].split(','), 
+                                           :username => ENV['MEMCACHIER_USERNAME'],
+                                           :password => ENV['MEMCACHIER_PASSWORD'])
+end
 
 configure do
   enable :cross_origin
