@@ -58,8 +58,8 @@ end
 def do_twitter_search_for_lyric(lyric)
   begin
     # search twitter
-    tweet = Twitter.search("\"#{lyric[:line]}\"", :result_type => "recent").select{ |tweet| is_tweet_ok(tweet) }.first
-    OpenStruct.new(text: tweet.text, link: "http://twitter.com/#{tweet.from_user_id}/status/#{tweet.id}", username: tweet.from_user, created_at: tweet.created_at)
+    chosen_tweet = Twitter.search("\"#{lyric[:line]}\"", :result_type => "recent").select{ |tweet| is_tweet_ok(tweet) }.first
+    OpenStruct.new(text: chosen_tweet.text, link: "http://twitter.com/#{chosen_tweet.from_user_id}/status/#{chosen_tweet.id}", username: chosen_tweet.from_user, created_at: chosen_tweet.created_at)
   rescue
     nil
   end
