@@ -15,7 +15,7 @@ set :allow_methods, [:get, :post, :options]
 set :allow_credentials, false
 
 # dalli settings
-set :cache_default_expiry, 60
+set :cache_default_expiry, 1
 configure :production do
   require 'newrelic_rpm'
 
@@ -38,7 +38,8 @@ def lyrics
     {:line => 'It was dark', :time => 1},
     {:line => 'In the car park', :time => 2},
     {:line => 'I heard a lark', :time => 3},
-    {:line => 'Ascending', :time => 3.5}
+    {:line => 'Ascending', :time => 3.5},
+    {:line => 'And you laughed', :time => 4}
   ]
 end
 
