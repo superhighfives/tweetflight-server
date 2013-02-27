@@ -75,12 +75,12 @@ get '/' do
   end
 end
 
-# for debugging, delete before deploying
-get '/cache/expire' do
-  expire "lyrics_json"
-end
+configure :development do
+  get '/cache/expire' do
+    expire "lyrics_json"
+  end
 
-get '/cache/inspect' do
-  send(:client).inspect
+  get '/cache/inspect' do
+    send(:client).inspect
+  end
 end
-# end debugging code
