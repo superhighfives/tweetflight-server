@@ -10,12 +10,12 @@ require 'ostruct'
 require 'sinatra/reloader' if development?
 
 # cross domain
-set :allow_origin, 'http://0.0.0.0:3501'
+set :allow_origin, 'http://localhost:3501'
 set :allow_methods, [:get, :post, :options]
 set :allow_credentials, false
 
 # dalli settings
-set :cache_default_expiry, 1
+set :cache_default_expiry, 60
 configure :production do
   require 'newrelic_rpm'
 
@@ -46,12 +46,12 @@ def tweet_for_lyric(lyric)
   # twitter search logic goes here
   tweet = do_twitter_search_for_lyric(lyric)
   if tweet
-    {:text => tweet.text, :link => tweet.link, :tweeter => tweet.username, :created_at => tweet.created_at}
+    {:text => tweet.text, :link => tweet.link, :username => tweet.username, :created_at => tweet.created_at}
   end
 end
 
 def is_tweet_ok(tweet)
-  tweet.to_user_id == 0 && tweet.text !~ /RT/
+  tweet.text !~ /RT/ && tweet.text !~ /@/
 end
 
 def do_twitter_search_for_lyric(lyric)
