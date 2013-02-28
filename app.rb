@@ -7,7 +7,9 @@ require 'twitter'
 require 'ostruct'
 
 # dev mode easy lols
-require 'sinatra/reloader' if development?
+configure :development do
+  require 'sinatra/reloader'
+end
 
 # cross domain
 set :allow_origin, 'http://localhost:3501'
@@ -22,13 +24,6 @@ configure :production do
   set :cache_client, ::Dalli::Client.new(ENV['MEMCACHIER_SERVERS'].split(','), 
                                            :username => ENV['MEMCACHIER_USERNAME'],
                                            :password => ENV['MEMCACHIER_PASSWORD'])
-end
-
-Twitter.configure do |config|
-  config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
-  config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
-  config.oauth_token = ENV['TWITTER_OAUTH_TOKEN']
-  config.oauth_token_secret = ENV['TWITTER_OAUTH_TOKEN_SECRET']
 end
 
 configure do
@@ -65,10 +60,13 @@ end
 def do_twitter_search_for_lyric(lyric)
   begin
     # search twitter
-    chosen_tweet = Twitter.search("\"#{lyric[:line]}\"", :result_type => "recent").select{ |tweet| is_tweet_ok(tweet) }.first
-    OpenStruct.new(text: chosen_tweet.text, link: "http://twitter.com/#{chosen_tweet.from_user_id}/status/#{chosen_tweet.id}", username: chosen_tweet.from_user, created_at: chosen_tweet.created_at)
+    chosen_tweet = Twitter.search("\"#{lyric[:line]}\"", :result_type => "recent").results.select{ |tweet| is_tweet_ok(tweet) }.first
+    if chosen_tweet
+      OpenStruct.new(text: chosen_tweet.text, link: "http://twitter.com/#{chosen_tweet.from_user_id}/status/#{chosen_tweet.id}", username: chosen_tweet.from_user, created_at: chosen_tweet.created_at)
+    end
   rescue
-    nil
+    # oh the lols. so many lols.
+    development? ? raise : nil
   end
 end
 
