@@ -12,7 +12,12 @@ configure :development do
 end
 
 # cross domain
-set :allow_origin, 'http://tweetflight.wearebrightly.com.s3-website-ap-southeast-2.amazonaws.com'
+configure :development do
+  set :allow_origin, 'http://localhost:3501'
+end
+configure :production do
+  set :allow_origin, 'http://tweetflight.wearebrightly.com'
+end
 set :allow_methods, [:get, :options]
 set :allow_credentials, false
 
