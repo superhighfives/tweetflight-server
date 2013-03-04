@@ -1,6 +1,7 @@
 # app.rb
 require 'sinatra'
 require 'sinatra/cross_origin'
+require 'sinatra/jsonp'
 require 'sinatra/dalli'
 require 'json'
 require 'twitter'
@@ -37,7 +38,7 @@ configure do
 end
 
 before do
-  response.headers["Access-Control-Allow-Headers"] = "x-requested-with, origin, x-csrftoken, content-type, accept"
+  response.headers["Access-Control-Allow-Headers"] = "x-requested-with"
 end
 
 def lyrics
@@ -114,12 +115,13 @@ end
 get '/tweets.json' do
   content_type :json
 
-  lyrics.map { |lyric|
+  results = lyrics.map { |lyric|
     lyric[:tweet] = cache "lyrics_json_#{lyric[:id]}" do
       tweet_for_lyric(lyric) || ""
     end
     lyric
-  }.to_json
+  }
+  jsonp results
 end
 
 configure :development do

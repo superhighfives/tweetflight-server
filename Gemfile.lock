@@ -20,6 +20,7 @@ GEM
     heroku-api (0.3.5)
       excon (~> 0.16.1)
     json (1.7.6)
+    json_pure (1.7.7)
     launchy (2.1.2)
       addressable (~> 2.3)
     mime-types (1.19)
@@ -51,6 +52,9 @@ GEM
     sinatra-dalli (0.1.0)
       dalli
       sinatra
+    sinatra-jsonp (0.3.2)
+      json_pure (~> 1.4)
+      sinatra (~> 1.0)
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -74,5 +78,6 @@ DEPENDENCIES
   sinatra-contrib
   sinatra-cross_origin
   sinatra-dalli
+  sinatra-jsonp
   thin
   twitter (= 3.8.0)
