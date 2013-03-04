@@ -37,7 +37,7 @@ configure do
 end
 
 before do
-  response.headers["Access-Control-Allow-Headers"] = "x-requested-with"
+  response.headers["Access-Control-Allow-Headers"] = "x-requested-with, origin, x-csrftoken, content-type, accept"
 end
 
 def lyrics
