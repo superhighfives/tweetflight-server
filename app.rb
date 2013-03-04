@@ -12,14 +12,15 @@ configure :development do
 end
 
 # cross domain
-configure :development do
-  set :allow_origin, 'http://localhost:3501'
+  configure :development do
+    set :allow_origin, '*'
 end
 configure :production do
   set :allow_origin, 'http://tweetflight.herokuapp.com'
 end
 set :allow_methods, [:get, :options]
 set :allow_credentials, false
+set :max_age, "1728000"
 
 # dalli settings
 set :cache_default_expiry, 3600
@@ -110,7 +111,7 @@ def do_twitter_search_for_lyric(lyric)
   end
 end
 
-get '/' do
+get '/tweets.json' do
   content_type :json
 
   lyrics.map { |lyric|
