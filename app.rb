@@ -16,7 +16,7 @@ end
     set :allow_origin, '*'
 end
 configure :production do
-  set :allow_origin, 'http://tweetflight.herokuapp.com'
+  set :allow_origin, 'http://tweetflight.wearebrightly.com'
 end
 set :allow_methods, [:get, :options]
 set :allow_credentials, false
