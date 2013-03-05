@@ -119,15 +119,13 @@ get '/tweets.json' do
   jsonp results
 end
 
-configure :development do
-  get '/cache/expire' do
-    lyrics.map { |lyric|
-      expire "lyrics_json_#{lyric[:id]}"
-      lyric[:line]
-    }.to_json
-  end
+get '/cache/expire' do
+  lyrics.map { |lyric|
+    expire "lyrics_json_#{lyric[:id]}"
+    lyric[:line]
+  }.to_json
+end
 
-  get '/cache/inspect' do
-    send(:client).inspect
-  end
+get '/cache/inspect' do
+  send(:client).inspect
 end
