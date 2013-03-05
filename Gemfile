@@ -7,7 +7,7 @@ gem 'sinatra-contrib'
 gem 'sinatra-jsonp'
 gem 'sinatra-dalli'
 gem 'json'
-gem 'twitter', '3.8.0'
+gem 'twitter'
 gem 'newrelic_rpm'
 
 group :development do
