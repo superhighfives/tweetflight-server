@@ -23,7 +23,7 @@ set :allow_methods, [:get, :options]
 set :allow_credentials, false
 set :max_age, "1728000"
 
-set :cache_default_expiry, 10
+set :cache_default_expiry, 600
 
 # dalli settings
 configure :production do
