@@ -13,8 +13,8 @@ configure :development do
 end
 
 # cross domain
-  configure :development do
-    set :allow_origin, '*'
+configure :development do
+  set :allow_origin, '*'
 end
 configure :production do
   set :allow_origin, 'http://tweetflight.wearebrightly.com'
@@ -23,8 +23,9 @@ set :allow_methods, [:get, :options]
 set :allow_credentials, false
 set :max_age, "1728000"
 
+set :cache_default_expiry, 900
+
 # dalli settings
-set :cache_default_expiry, 3600
 configure :production do
   require 'newrelic_rpm'
 
@@ -54,10 +55,8 @@ def lyrics
     {id: 7, line: "There was a spark exploding", time: 7},
     {id: 8, line: "In the dry bark", time: 8},
 
-    {id: 9, line: "Honey, you look sick", time: 8.5},
-    {id: 10, line: "Don't you know that this", time: 9},
-    {id: 11, line: "is everything", time: 9.5},
-    {id: 12, line: "We are everything", time: 10},
+    {id: 10, line: "you look sick", time: 9.5},
+    {id: 12, line: "We are everything", time: 10.5},
 
     {id: 13, line: "And all my clothes", time: 14.5},
     {id: 14, line: "Well baby they were thrown", time: 15.5},
@@ -69,15 +68,11 @@ def lyrics
     {id: 19, line: "Cause I was always looking", time: 20.5},
     {id: 20, line: "For a spark", time: 21.5},
 
-    {id: 21, line: "Honey we can't lose", time: 23},
-    {id: 22, line: "When we make the rules", time: 23.5},
-    {id: 23, line: "But we never won", time: 24},
-    {id: 24, line: "Did we", time: 24.5},
+    {id: 21, line: "we can't lose", time: 23},
+    {id: 23, line: "we never won", time: 24},
 
-    {id: 25, line: "And I'm going to make it", time: 26.5},
-    {id: 26, line: "anyway", time: 27.5},
-    {id: 27, line: "And I'm going to fake it", time: 29},
-    {id: 28, line: "baby", time: 29.5},
+    {id: 25, line: "I'm going to make it anyway", time: 27},
+    {id: 27, line: "I'm going to fake it baby", time: 29},
 
     {id: 29, line: "I feel it now", time: 32.5},
     {id: 30, line: "I feel it now", time: 33.5},
@@ -95,7 +90,7 @@ def tweet_for_lyric(lyric)
 end
 
 def is_tweet_ok(tweet)
-  tweet.text !~ /RT/ && tweet.text !~ /@/ && tweet.text !~ /http/
+  tweet.text !~ /RT/ && tweet.text !~ /@/ && tweet.text !~ /http/ && tweet.text !~ /&amp;/
 end
 
 def do_twitter_search_for_lyric(lyric)
