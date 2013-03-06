@@ -1,5 +1,6 @@
-# Preflight Tweets or Tweetflight or whatevs
+# Preflight Nerves (server)
 
+## Installation
 First time running?
 
     brew install memcached
@@ -9,7 +10,7 @@ Then every other time
     /usr/local/opt/memcached/bin/memcached &
     bundle exec foreman start
 
-make sure you make a .env file like sample.env so the twitter auth works.
+Make sure you make a .env file like sample.env so the twitter auth works.
 
 You also need to make sure the correct values are set on heroku via
 
@@ -17,4 +18,5 @@ You also need to make sure the correct values are set on heroku via
   ...
   etc
 
-But I already did that.
+## License
+This code (not including the lyrics) is licensed under a [Creative Commons Attribution License](http://creativecommons.org/licenses/by/3.0/): you may use it, but you must give attribution.
