@@ -98,7 +98,7 @@ def do_twitter_search_for_lyric(lyric)
     # search twitter
     chosen_tweet = Twitter.search("\"#{lyric[:line]}\"", :result_type => "recent").results.select{ |tweet| is_tweet_ok(tweet) }.sample
     if chosen_tweet
-      OpenStruct.new(text: chosen_tweet.text, link: "http://twitter.com/#{chosen_tweet.from_user_id}/status/#{chosen_tweet.id}", username: chosen_tweet.from_user, created_at: chosen_tweet.created_at)
+      OpenStruct.new(text: chosen_tweet.text, link: "http://twitter.com/#{chosen_tweet.user[:id]}/status/#{chosen_tweet.id}", username: chosen_tweet.from_user, created_at: chosen_tweet.created_at)
     end
   rescue
     # oh the lols. so many lols.
