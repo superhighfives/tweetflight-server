@@ -90,7 +90,7 @@ def tweet_for_lyric(lyric)
 end
 
 def is_tweet_ok(tweet)
-  tweet.text !~ /RT/ && tweet.text !~ /@/ && tweet.text !~ /http/ && tweet.text !~ /&amp;/
+  tweet.text !~ /RT/ && tweet.text !~ /@/ && tweet.text !~ /http/ && tweet.text !~ /&/ && tweet.text !~ /#/
 end
 
 def do_twitter_search_for_lyric(lyric)
