@@ -85,7 +85,14 @@ def tweet_for_lyric(lyric)
   # twitter search logic goes here
   tweet = do_twitter_search_for_lyric(lyric)
   if tweet
-    {:text => tweet.text, :link => tweet.link, :username => tweet.username, :created_at => tweet.created_at}
+    encoding_options = {
+      :invalid           => :replace,  # Replace invalid byte sequences
+      :undef             => :replace,  # Replace anything not defined in ASCII
+      :replace           => '',        # Use a blank for those replacements
+      :universal_newline => true       # Always break lines with \n
+    }
+    tweet_text = tweet.text.encode Encoding.find('ASCII'), encoding_options
+    {:text => tweet_text, :link => tweet.link, :username => tweet.username, :created_at => tweet.created_at}
   end
 end
 
