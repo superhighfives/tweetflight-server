@@ -53,11 +53,13 @@ end
 get '/tweets.json' do
   content_type :json
   results = Lyrics.all.collect {|lyric|
+    tweet = tweet_cache.get(lyric)
+    p tweet.keys
     {
       id: lyric.id,
       line: lyric.line,
       time: lyric.time,
-      tweet: tweet_cache.get(lyric)
+      tweet: tweet
     }
   }
   jsonp results

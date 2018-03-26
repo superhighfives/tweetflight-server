@@ -17,8 +17,8 @@ class Lyrics
       {id: 10, line: "you look sick", time: 9.5},
       {id: 12, line: "We are everything", time: 10.5},
 
-      {id: 13, line: "And all my clothes", time: 14.5},
-      {id: 14, line: "Well baby they were thrown", time: 15.5},
+      {id: 13, line: "All my clothes", time: 14.5},
+      {id: 14, line: "They were thrown", time: 15.5},
       {id: 15, line: "Into the sea", time: 16.5},
       {id: 16, line: "God I felt it when you left me", time: 17.5},
 

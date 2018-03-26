@@ -4,9 +4,10 @@ class TwitterSearcher
 
   def random_result(text)
     if tweet = search(text).sample
-      log "Found: \"#{tweet.text}\". Retweeting..."
+      log "Found: #{tweet.text}"
 
       unless ENV["NO_RETWEET"]
+        log "Retweeting..."
         Twitter.retweet(tweet.id) rescue nil
       end
 
